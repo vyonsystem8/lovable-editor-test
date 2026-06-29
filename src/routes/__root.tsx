@@ -11,6 +11,10 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Header } from "../components/site/Header";
+import { Footer } from "../components/site/Footer";
+import { WhatsAppFloat } from "../components/site/WhatsAppFloat";
+import { trackEvent } from "../lib/track";
 
 function NotFoundComponent() {
   return (
@@ -77,16 +81,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Consync Contabilidade | Contabilidade Consultiva em Brasília" },
+      { name: "description", content: "Contabilidade consultiva em Brasília. Tecnologia, estratégia e proximidade para empresas que querem crescer com segurança." },
+      { name: "author", content: "Consync Contabilidade" },
+      { name: "theme-color", content: "#182433" },
+      { property: "og:site_name", content: "Consync Contabilidade" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:locale", content: "pt_BR" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -115,11 +122,42 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    const fire = () => trackEvent("page_view", { path: window.location.pathname });
+    fire();
+    const unsub = router.subscribe("onResolved", fire);
+    return () => unsub();
+  }, [router]);
+
+  useEffect(() => {
+    const marks = [25, 50, 75, 90] as const;
+    const seen = new Set<number>();
+    const onScroll = () => {
+      const h = document.documentElement;
+      const pct = ((h.scrollTop + window.innerHeight) / h.scrollHeight) * 100;
+      marks.forEach((m) => {
+        if (pct >= m && !seen.has(m)) {
+          seen.add(m);
+          trackEvent(`scroll_${m}` as const);
+        }
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen flex flex-col bg-[#F8F8F5]">
+        <Header />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
+        <WhatsAppFloat />
+      </div>
     </QueryClientProvider>
   );
 }
