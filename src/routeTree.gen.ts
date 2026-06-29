@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolucoesRouteImport } from './routes/solucoes'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as SegmentosRouteImport } from './routes/segmentos'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as PlanejamentoTributarioBrasiliaRouteImport } from './routes/planejamento-tributario-brasilia'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ContabilidadeParaPrestadoresDeServicosRouteImport } from './routes/contabilidade-para-prestadores-de-servicos'
@@ -36,6 +37,11 @@ const SobreRoute = SobreRouteImport.update({
 const SegmentosRoute = SegmentosRouteImport.update({
   id: '/segmentos',
   path: '/segmentos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlanejamentoTributarioBrasiliaRoute =
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/contabilidade-para-prestadores-de-servicos': typeof ContabilidadeParaPrestadoresDeServicosRoute
   '/contato': typeof ContatoRoute
   '/planejamento-tributario-brasilia': typeof PlanejamentoTributarioBrasiliaRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/segmentos': typeof SegmentosRoute
   '/sobre': typeof SobreRoute
   '/solucoes': typeof SolucoesRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/contabilidade-para-prestadores-de-servicos': typeof ContabilidadeParaPrestadoresDeServicosRoute
   '/contato': typeof ContatoRoute
   '/planejamento-tributario-brasilia': typeof PlanejamentoTributarioBrasiliaRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/segmentos': typeof SegmentosRoute
   '/sobre': typeof SobreRoute
   '/solucoes': typeof SolucoesRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/contabilidade-para-prestadores-de-servicos': typeof ContabilidadeParaPrestadoresDeServicosRoute
   '/contato': typeof ContatoRoute
   '/planejamento-tributario-brasilia': typeof PlanejamentoTributarioBrasiliaRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/segmentos': typeof SegmentosRoute
   '/sobre': typeof SobreRoute
   '/solucoes': typeof SolucoesRoute
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/contabilidade-para-prestadores-de-servicos'
     | '/contato'
     | '/planejamento-tributario-brasilia'
+    | '/politica-de-privacidade'
     | '/segmentos'
     | '/sobre'
     | '/solucoes'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/contabilidade-para-prestadores-de-servicos'
     | '/contato'
     | '/planejamento-tributario-brasilia'
+    | '/politica-de-privacidade'
     | '/segmentos'
     | '/sobre'
     | '/solucoes'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/contabilidade-para-prestadores-de-servicos'
     | '/contato'
     | '/planejamento-tributario-brasilia'
+    | '/politica-de-privacidade'
     | '/segmentos'
     | '/sobre'
     | '/solucoes'
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   ContabilidadeParaPrestadoresDeServicosRoute: typeof ContabilidadeParaPrestadoresDeServicosRoute
   ContatoRoute: typeof ContatoRoute
   PlanejamentoTributarioBrasiliaRoute: typeof PlanejamentoTributarioBrasiliaRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   SegmentosRoute: typeof SegmentosRoute
   SobreRoute: typeof SobreRoute
   SolucoesRoute: typeof SolucoesRoute
@@ -225,6 +238,13 @@ declare module '@tanstack/react-router' {
       path: '/segmentos'
       fullPath: '/segmentos'
       preLoaderRoute: typeof SegmentosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/planejamento-tributario-brasilia': {
@@ -311,6 +331,7 @@ const rootRouteChildren: RootRouteChildren = {
     ContabilidadeParaPrestadoresDeServicosRoute,
   ContatoRoute: ContatoRoute,
   PlanejamentoTributarioBrasiliaRoute: PlanejamentoTributarioBrasiliaRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   SegmentosRoute: SegmentosRoute,
   SobreRoute: SobreRoute,
   SolucoesRoute: SolucoesRoute,
