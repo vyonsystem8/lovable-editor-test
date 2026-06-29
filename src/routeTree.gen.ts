@@ -9,38 +9,313 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
+import { Route as SolucoesRouteImport } from './routes/solucoes'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as SegmentosRouteImport } from './routes/segmentos'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as PlanejamentoTributarioBrasiliaRouteImport } from './routes/planejamento-tributario-brasilia'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ContabilidadeParaPrestadoresDeServicosRouteImport } from './routes/contabilidade-para-prestadores-de-servicos'
+import { Route as ContabilidadeParaEmpresasEmCrescimentoRouteImport } from './routes/contabilidade-para-empresas-em-crescimento'
+import { Route as ContabilidadeConsultivaBrasiliaRouteImport } from './routes/contabilidade-consultiva-brasilia'
+import { Route as BpoFinanceiroBrasiliaRouteImport } from './routes/bpo-financeiro-brasilia'
+import { Route as AberturaDeEmpresaBrasiliaRouteImport } from './routes/abertura-de-empresa-brasilia'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
+  id: '/termos-de-uso',
+  path: '/termos-de-uso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolucoesRoute = SolucoesRouteImport.update({
+  id: '/solucoes',
+  path: '/solucoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SegmentosRoute = SegmentosRouteImport.update({
+  id: '/segmentos',
+  path: '/segmentos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanejamentoTributarioBrasiliaRoute =
+  PlanejamentoTributarioBrasiliaRouteImport.update({
+    id: '/planejamento-tributario-brasilia',
+    path: '/planejamento-tributario-brasilia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContabilidadeParaPrestadoresDeServicosRoute =
+  ContabilidadeParaPrestadoresDeServicosRouteImport.update({
+    id: '/contabilidade-para-prestadores-de-servicos',
+    path: '/contabilidade-para-prestadores-de-servicos',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ContabilidadeParaEmpresasEmCrescimentoRoute =
+  ContabilidadeParaEmpresasEmCrescimentoRouteImport.update({
+    id: '/contabilidade-para-empresas-em-crescimento',
+    path: '/contabilidade-para-empresas-em-crescimento',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ContabilidadeConsultivaBrasiliaRoute =
+  ContabilidadeConsultivaBrasiliaRouteImport.update({
+    id: '/contabilidade-consultiva-brasilia',
+    path: '/contabilidade-consultiva-brasilia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BpoFinanceiroBrasiliaRoute = BpoFinanceiroBrasiliaRouteImport.update({
+  id: '/bpo-financeiro-brasilia',
+  path: '/bpo-financeiro-brasilia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AberturaDeEmpresaBrasiliaRoute =
+  AberturaDeEmpresaBrasiliaRouteImport.update({
+    id: '/abertura-de-empresa-brasilia',
+    path: '/abertura-de-empresa-brasilia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/abertura-de-empresa-brasilia': typeof AberturaDeEmpresaBrasiliaRoute
+  '/bpo-financeiro-brasilia': typeof BpoFinanceiroBrasiliaRoute
+  '/contabilidade-consultiva-brasilia': typeof ContabilidadeConsultivaBrasiliaRoute
+  '/contabilidade-para-empresas-em-crescimento': typeof ContabilidadeParaEmpresasEmCrescimentoRoute
+  '/contabilidade-para-prestadores-de-servicos': typeof ContabilidadeParaPrestadoresDeServicosRoute
+  '/contato': typeof ContatoRoute
+  '/planejamento-tributario-brasilia': typeof PlanejamentoTributarioBrasiliaRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/segmentos': typeof SegmentosRoute
+  '/sobre': typeof SobreRoute
+  '/solucoes': typeof SolucoesRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/abertura-de-empresa-brasilia': typeof AberturaDeEmpresaBrasiliaRoute
+  '/bpo-financeiro-brasilia': typeof BpoFinanceiroBrasiliaRoute
+  '/contabilidade-consultiva-brasilia': typeof ContabilidadeConsultivaBrasiliaRoute
+  '/contabilidade-para-empresas-em-crescimento': typeof ContabilidadeParaEmpresasEmCrescimentoRoute
+  '/contabilidade-para-prestadores-de-servicos': typeof ContabilidadeParaPrestadoresDeServicosRoute
+  '/contato': typeof ContatoRoute
+  '/planejamento-tributario-brasilia': typeof PlanejamentoTributarioBrasiliaRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/segmentos': typeof SegmentosRoute
+  '/sobre': typeof SobreRoute
+  '/solucoes': typeof SolucoesRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/abertura-de-empresa-brasilia': typeof AberturaDeEmpresaBrasiliaRoute
+  '/bpo-financeiro-brasilia': typeof BpoFinanceiroBrasiliaRoute
+  '/contabilidade-consultiva-brasilia': typeof ContabilidadeConsultivaBrasiliaRoute
+  '/contabilidade-para-empresas-em-crescimento': typeof ContabilidadeParaEmpresasEmCrescimentoRoute
+  '/contabilidade-para-prestadores-de-servicos': typeof ContabilidadeParaPrestadoresDeServicosRoute
+  '/contato': typeof ContatoRoute
+  '/planejamento-tributario-brasilia': typeof PlanejamentoTributarioBrasiliaRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/segmentos': typeof SegmentosRoute
+  '/sobre': typeof SobreRoute
+  '/solucoes': typeof SolucoesRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/abertura-de-empresa-brasilia'
+    | '/bpo-financeiro-brasilia'
+    | '/contabilidade-consultiva-brasilia'
+    | '/contabilidade-para-empresas-em-crescimento'
+    | '/contabilidade-para-prestadores-de-servicos'
+    | '/contato'
+    | '/planejamento-tributario-brasilia'
+    | '/politica-de-privacidade'
+    | '/segmentos'
+    | '/sobre'
+    | '/solucoes'
+    | '/termos-de-uso'
+    | '/blog/$slug'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/abertura-de-empresa-brasilia'
+    | '/bpo-financeiro-brasilia'
+    | '/contabilidade-consultiva-brasilia'
+    | '/contabilidade-para-empresas-em-crescimento'
+    | '/contabilidade-para-prestadores-de-servicos'
+    | '/contato'
+    | '/planejamento-tributario-brasilia'
+    | '/politica-de-privacidade'
+    | '/segmentos'
+    | '/sobre'
+    | '/solucoes'
+    | '/termos-de-uso'
+    | '/blog/$slug'
+    | '/blog'
+  id:
+    | '__root__'
+    | '/'
+    | '/abertura-de-empresa-brasilia'
+    | '/bpo-financeiro-brasilia'
+    | '/contabilidade-consultiva-brasilia'
+    | '/contabilidade-para-empresas-em-crescimento'
+    | '/contabilidade-para-prestadores-de-servicos'
+    | '/contato'
+    | '/planejamento-tributario-brasilia'
+    | '/politica-de-privacidade'
+    | '/segmentos'
+    | '/sobre'
+    | '/solucoes'
+    | '/termos-de-uso'
+    | '/blog/$slug'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AberturaDeEmpresaBrasiliaRoute: typeof AberturaDeEmpresaBrasiliaRoute
+  BpoFinanceiroBrasiliaRoute: typeof BpoFinanceiroBrasiliaRoute
+  ContabilidadeConsultivaBrasiliaRoute: typeof ContabilidadeConsultivaBrasiliaRoute
+  ContabilidadeParaEmpresasEmCrescimentoRoute: typeof ContabilidadeParaEmpresasEmCrescimentoRoute
+  ContabilidadeParaPrestadoresDeServicosRoute: typeof ContabilidadeParaPrestadoresDeServicosRoute
+  ContatoRoute: typeof ContatoRoute
+  PlanejamentoTributarioBrasiliaRoute: typeof PlanejamentoTributarioBrasiliaRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
+  SegmentosRoute: typeof SegmentosRoute
+  SobreRoute: typeof SobreRoute
+  SolucoesRoute: typeof SolucoesRoute
+  TermosDeUsoRoute: typeof TermosDeUsoRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos-de-uso': {
+      id: '/termos-de-uso'
+      path: '/termos-de-uso'
+      fullPath: '/termos-de-uso'
+      preLoaderRoute: typeof TermosDeUsoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solucoes': {
+      id: '/solucoes'
+      path: '/solucoes'
+      fullPath: '/solucoes'
+      preLoaderRoute: typeof SolucoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/segmentos': {
+      id: '/segmentos'
+      path: '/segmentos'
+      fullPath: '/segmentos'
+      preLoaderRoute: typeof SegmentosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planejamento-tributario-brasilia': {
+      id: '/planejamento-tributario-brasilia'
+      path: '/planejamento-tributario-brasilia'
+      fullPath: '/planejamento-tributario-brasilia'
+      preLoaderRoute: typeof PlanejamentoTributarioBrasiliaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contabilidade-para-prestadores-de-servicos': {
+      id: '/contabilidade-para-prestadores-de-servicos'
+      path: '/contabilidade-para-prestadores-de-servicos'
+      fullPath: '/contabilidade-para-prestadores-de-servicos'
+      preLoaderRoute: typeof ContabilidadeParaPrestadoresDeServicosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contabilidade-para-empresas-em-crescimento': {
+      id: '/contabilidade-para-empresas-em-crescimento'
+      path: '/contabilidade-para-empresas-em-crescimento'
+      fullPath: '/contabilidade-para-empresas-em-crescimento'
+      preLoaderRoute: typeof ContabilidadeParaEmpresasEmCrescimentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contabilidade-consultiva-brasilia': {
+      id: '/contabilidade-consultiva-brasilia'
+      path: '/contabilidade-consultiva-brasilia'
+      fullPath: '/contabilidade-consultiva-brasilia'
+      preLoaderRoute: typeof ContabilidadeConsultivaBrasiliaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bpo-financeiro-brasilia': {
+      id: '/bpo-financeiro-brasilia'
+      path: '/bpo-financeiro-brasilia'
+      fullPath: '/bpo-financeiro-brasilia'
+      preLoaderRoute: typeof BpoFinanceiroBrasiliaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/abertura-de-empresa-brasilia': {
+      id: '/abertura-de-empresa-brasilia'
+      path: '/abertura-de-empresa-brasilia'
+      fullPath: '/abertura-de-empresa-brasilia'
+      preLoaderRoute: typeof AberturaDeEmpresaBrasiliaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +323,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AberturaDeEmpresaBrasiliaRoute: AberturaDeEmpresaBrasiliaRoute,
+  BpoFinanceiroBrasiliaRoute: BpoFinanceiroBrasiliaRoute,
+  ContabilidadeConsultivaBrasiliaRoute: ContabilidadeConsultivaBrasiliaRoute,
+  ContabilidadeParaEmpresasEmCrescimentoRoute:
+    ContabilidadeParaEmpresasEmCrescimentoRoute,
+  ContabilidadeParaPrestadoresDeServicosRoute:
+    ContabilidadeParaPrestadoresDeServicosRoute,
+  ContatoRoute: ContatoRoute,
+  PlanejamentoTributarioBrasiliaRoute: PlanejamentoTributarioBrasiliaRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
+  SegmentosRoute: SegmentosRoute,
+  SobreRoute: SobreRoute,
+  SolucoesRoute: SolucoesRoute,
+  TermosDeUsoRoute: TermosDeUsoRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
