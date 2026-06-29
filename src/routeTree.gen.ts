@@ -12,7 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolucoesRouteImport } from './routes/solucoes'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as SegmentosRouteImport } from './routes/segmentos'
+import { Route as PlanejamentoTributarioBrasiliaRouteImport } from './routes/planejamento-tributario-brasilia'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ContabilidadeParaPrestadoresDeServicosRouteImport } from './routes/contabilidade-para-prestadores-de-servicos'
+import { Route as ContabilidadeParaEmpresasEmCrescimentoRouteImport } from './routes/contabilidade-para-empresas-em-crescimento'
+import { Route as ContabilidadeConsultivaBrasiliaRouteImport } from './routes/contabilidade-consultiva-brasilia'
+import { Route as BpoFinanceiroBrasiliaRouteImport } from './routes/bpo-financeiro-brasilia'
+import { Route as AberturaDeEmpresaBrasiliaRouteImport } from './routes/abertura-de-empresa-brasilia'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -32,11 +38,46 @@ const SegmentosRoute = SegmentosRouteImport.update({
   path: '/segmentos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanejamentoTributarioBrasiliaRoute =
+  PlanejamentoTributarioBrasiliaRouteImport.update({
+    id: '/planejamento-tributario-brasilia',
+    path: '/planejamento-tributario-brasilia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContabilidadeParaPrestadoresDeServicosRoute =
+  ContabilidadeParaPrestadoresDeServicosRouteImport.update({
+    id: '/contabilidade-para-prestadores-de-servicos',
+    path: '/contabilidade-para-prestadores-de-servicos',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ContabilidadeParaEmpresasEmCrescimentoRoute =
+  ContabilidadeParaEmpresasEmCrescimentoRouteImport.update({
+    id: '/contabilidade-para-empresas-em-crescimento',
+    path: '/contabilidade-para-empresas-em-crescimento',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ContabilidadeConsultivaBrasiliaRoute =
+  ContabilidadeConsultivaBrasiliaRouteImport.update({
+    id: '/contabilidade-consultiva-brasilia',
+    path: '/contabilidade-consultiva-brasilia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BpoFinanceiroBrasiliaRoute = BpoFinanceiroBrasiliaRouteImport.update({
+  id: '/bpo-financeiro-brasilia',
+  path: '/bpo-financeiro-brasilia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AberturaDeEmpresaBrasiliaRoute =
+  AberturaDeEmpresaBrasiliaRouteImport.update({
+    id: '/abertura-de-empresa-brasilia',
+    path: '/abertura-de-empresa-brasilia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -55,7 +96,13 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/abertura-de-empresa-brasilia': typeof AberturaDeEmpresaBrasiliaRoute
+  '/bpo-financeiro-brasilia': typeof BpoFinanceiroBrasiliaRoute
+  '/contabilidade-consultiva-brasilia': typeof ContabilidadeConsultivaBrasiliaRoute
+  '/contabilidade-para-empresas-em-crescimento': typeof ContabilidadeParaEmpresasEmCrescimentoRoute
+  '/contabilidade-para-prestadores-de-servicos': typeof ContabilidadeParaPrestadoresDeServicosRoute
   '/contato': typeof ContatoRoute
+  '/planejamento-tributario-brasilia': typeof PlanejamentoTributarioBrasiliaRoute
   '/segmentos': typeof SegmentosRoute
   '/sobre': typeof SobreRoute
   '/solucoes': typeof SolucoesRoute
@@ -64,7 +111,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/abertura-de-empresa-brasilia': typeof AberturaDeEmpresaBrasiliaRoute
+  '/bpo-financeiro-brasilia': typeof BpoFinanceiroBrasiliaRoute
+  '/contabilidade-consultiva-brasilia': typeof ContabilidadeConsultivaBrasiliaRoute
+  '/contabilidade-para-empresas-em-crescimento': typeof ContabilidadeParaEmpresasEmCrescimentoRoute
+  '/contabilidade-para-prestadores-de-servicos': typeof ContabilidadeParaPrestadoresDeServicosRoute
   '/contato': typeof ContatoRoute
+  '/planejamento-tributario-brasilia': typeof PlanejamentoTributarioBrasiliaRoute
   '/segmentos': typeof SegmentosRoute
   '/sobre': typeof SobreRoute
   '/solucoes': typeof SolucoesRoute
@@ -74,7 +127,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/abertura-de-empresa-brasilia': typeof AberturaDeEmpresaBrasiliaRoute
+  '/bpo-financeiro-brasilia': typeof BpoFinanceiroBrasiliaRoute
+  '/contabilidade-consultiva-brasilia': typeof ContabilidadeConsultivaBrasiliaRoute
+  '/contabilidade-para-empresas-em-crescimento': typeof ContabilidadeParaEmpresasEmCrescimentoRoute
+  '/contabilidade-para-prestadores-de-servicos': typeof ContabilidadeParaPrestadoresDeServicosRoute
   '/contato': typeof ContatoRoute
+  '/planejamento-tributario-brasilia': typeof PlanejamentoTributarioBrasiliaRoute
   '/segmentos': typeof SegmentosRoute
   '/sobre': typeof SobreRoute
   '/solucoes': typeof SolucoesRoute
@@ -85,7 +144,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/abertura-de-empresa-brasilia'
+    | '/bpo-financeiro-brasilia'
+    | '/contabilidade-consultiva-brasilia'
+    | '/contabilidade-para-empresas-em-crescimento'
+    | '/contabilidade-para-prestadores-de-servicos'
     | '/contato'
+    | '/planejamento-tributario-brasilia'
     | '/segmentos'
     | '/sobre'
     | '/solucoes'
@@ -94,7 +159,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/abertura-de-empresa-brasilia'
+    | '/bpo-financeiro-brasilia'
+    | '/contabilidade-consultiva-brasilia'
+    | '/contabilidade-para-empresas-em-crescimento'
+    | '/contabilidade-para-prestadores-de-servicos'
     | '/contato'
+    | '/planejamento-tributario-brasilia'
     | '/segmentos'
     | '/sobre'
     | '/solucoes'
@@ -103,7 +174,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/abertura-de-empresa-brasilia'
+    | '/bpo-financeiro-brasilia'
+    | '/contabilidade-consultiva-brasilia'
+    | '/contabilidade-para-empresas-em-crescimento'
+    | '/contabilidade-para-prestadores-de-servicos'
     | '/contato'
+    | '/planejamento-tributario-brasilia'
     | '/segmentos'
     | '/sobre'
     | '/solucoes'
@@ -113,7 +190,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AberturaDeEmpresaBrasiliaRoute: typeof AberturaDeEmpresaBrasiliaRoute
+  BpoFinanceiroBrasiliaRoute: typeof BpoFinanceiroBrasiliaRoute
+  ContabilidadeConsultivaBrasiliaRoute: typeof ContabilidadeConsultivaBrasiliaRoute
+  ContabilidadeParaEmpresasEmCrescimentoRoute: typeof ContabilidadeParaEmpresasEmCrescimentoRoute
+  ContabilidadeParaPrestadoresDeServicosRoute: typeof ContabilidadeParaPrestadoresDeServicosRoute
   ContatoRoute: typeof ContatoRoute
+  PlanejamentoTributarioBrasiliaRoute: typeof PlanejamentoTributarioBrasiliaRoute
   SegmentosRoute: typeof SegmentosRoute
   SobreRoute: typeof SobreRoute
   SolucoesRoute: typeof SolucoesRoute
@@ -144,11 +227,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SegmentosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/planejamento-tributario-brasilia': {
+      id: '/planejamento-tributario-brasilia'
+      path: '/planejamento-tributario-brasilia'
+      fullPath: '/planejamento-tributario-brasilia'
+      preLoaderRoute: typeof PlanejamentoTributarioBrasiliaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contato': {
       id: '/contato'
       path: '/contato'
       fullPath: '/contato'
       preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contabilidade-para-prestadores-de-servicos': {
+      id: '/contabilidade-para-prestadores-de-servicos'
+      path: '/contabilidade-para-prestadores-de-servicos'
+      fullPath: '/contabilidade-para-prestadores-de-servicos'
+      preLoaderRoute: typeof ContabilidadeParaPrestadoresDeServicosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contabilidade-para-empresas-em-crescimento': {
+      id: '/contabilidade-para-empresas-em-crescimento'
+      path: '/contabilidade-para-empresas-em-crescimento'
+      fullPath: '/contabilidade-para-empresas-em-crescimento'
+      preLoaderRoute: typeof ContabilidadeParaEmpresasEmCrescimentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contabilidade-consultiva-brasilia': {
+      id: '/contabilidade-consultiva-brasilia'
+      path: '/contabilidade-consultiva-brasilia'
+      fullPath: '/contabilidade-consultiva-brasilia'
+      preLoaderRoute: typeof ContabilidadeConsultivaBrasiliaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bpo-financeiro-brasilia': {
+      id: '/bpo-financeiro-brasilia'
+      path: '/bpo-financeiro-brasilia'
+      fullPath: '/bpo-financeiro-brasilia'
+      preLoaderRoute: typeof BpoFinanceiroBrasiliaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/abertura-de-empresa-brasilia': {
+      id: '/abertura-de-empresa-brasilia'
+      path: '/abertura-de-empresa-brasilia'
+      fullPath: '/abertura-de-empresa-brasilia'
+      preLoaderRoute: typeof AberturaDeEmpresaBrasiliaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -177,7 +302,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AberturaDeEmpresaBrasiliaRoute: AberturaDeEmpresaBrasiliaRoute,
+  BpoFinanceiroBrasiliaRoute: BpoFinanceiroBrasiliaRoute,
+  ContabilidadeConsultivaBrasiliaRoute: ContabilidadeConsultivaBrasiliaRoute,
+  ContabilidadeParaEmpresasEmCrescimentoRoute:
+    ContabilidadeParaEmpresasEmCrescimentoRoute,
+  ContabilidadeParaPrestadoresDeServicosRoute:
+    ContabilidadeParaPrestadoresDeServicosRoute,
   ContatoRoute: ContatoRoute,
+  PlanejamentoTributarioBrasiliaRoute: PlanejamentoTributarioBrasiliaRoute,
   SegmentosRoute: SegmentosRoute,
   SobreRoute: SobreRoute,
   SolucoesRoute: SolucoesRoute,
