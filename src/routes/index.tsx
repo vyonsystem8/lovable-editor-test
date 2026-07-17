@@ -40,6 +40,7 @@ function Index() {
   return (
     <>
       <Hero />
+      <CodexTest />
       <Sobre />
       <PorQue />
       <Solucoes />
@@ -90,6 +91,21 @@ function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+function CodexTest() {
+  return (
+    <Section className="py-10 md:py-14">
+      <div className="rounded-2xl border border-[#D8DDE4] bg-white p-6 md:p-8">
+        <h2 className="text-2xl md:text-3xl font-extrabold leading-tight tracking-tight text-[#182433]">
+          🚀 Este projeto está sendo desenvolvido com Codex
+        </h2>
+        <p className="mt-4 max-w-3xl text-base md:text-lg leading-relaxed text-[#385577]">
+          Esta é uma área de teste para validar alterações automáticas utilizando o Codex da OpenAI.
+        </p>
+      </div>
+    </Section>
   );
 }
 
