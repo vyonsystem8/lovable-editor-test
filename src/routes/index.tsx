@@ -131,7 +131,7 @@ function HomeMotion() {
 
     const revealTargets = Array.from(
       document.querySelectorAll<HTMLElement>(
-        "main section:not(.home-hero), main section:not(.home-hero) .rounded-2xl, main section:not(.home-hero) .rounded-xl, main section:not(.home-hero) article, main section:not(.home-hero) .group",
+        "main section:not(.home-hero) .rounded-2xl, main section:not(.home-hero) .rounded-xl, main section:not(.home-hero) article, main section:not(.home-hero) .group",
       ),
     );
 
@@ -140,11 +140,15 @@ function HomeMotion() {
       el.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 70}ms`);
     });
 
+    const reveal = (target: Element) => {
+      target.classList.add("is-visible");
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+            reveal(entry.target);
             observer.unobserve(entry.target);
           }
         });
@@ -153,6 +157,10 @@ function HomeMotion() {
     );
 
     revealTargets.forEach((el) => observer.observe(el));
+    const revealFallback = window.setTimeout(() => {
+      revealTargets.forEach(reveal);
+      observer.disconnect();
+    }, 1800);
 
     let frame = 0;
     const updateHeroScroll = () => {
@@ -169,6 +177,7 @@ function HomeMotion() {
 
     return () => {
       root.classList.remove("motion-ready");
+      window.clearTimeout(revealFallback);
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
       if (frame) cancelAnimationFrame(frame);
