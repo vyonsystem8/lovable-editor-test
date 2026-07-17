@@ -119,6 +119,13 @@ function Hero() {
 function HomeMotion() {
   useEffect(() => {
     const root = document.documentElement;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion) {
+      root.style.removeProperty("--hero-scroll");
+      return;
+    }
+
     root.classList.add("motion-ready");
 
     const revealTargets = Array.from(
@@ -189,6 +196,11 @@ function Stat({
 
   useEffect(() => {
     if (value === undefined) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplay(n);
+      return;
+    }
 
     let frame = 0;
     let start = 0;
