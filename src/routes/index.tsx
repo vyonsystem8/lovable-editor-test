@@ -59,6 +59,7 @@ function Index() {
     <>
       <HomeMotion />
       <Hero />
+      <CodexTest />
       <Sobre />
       <PorQue />
       <Solucoes />
