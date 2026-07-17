@@ -59,7 +59,6 @@ function Index() {
     <>
       <HomeMotion />
       <Hero />
-      <CodexTest />
       <Sobre />
       <PorQue />
       <Solucoes />
@@ -117,86 +116,59 @@ function Hero() {
   );
 }
 
+const HERO_SCROLL_DISTANCE = 520;
+
+function prefersReducedMotion() {
+  return (
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
+function getHeroScrollProgress() {
+  return Math.min(window.scrollY / HERO_SCROLL_DISTANCE, 1).toFixed(3);
+}
+
 function HomeMotion() {
   useEffect(() => {
     const root = document.documentElement;
-    const reduceMotion =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (reduceMotion) {
+    if (prefersReducedMotion()) {
       root.style.removeProperty("--hero-scroll");
       return;
     }
 
     root.classList.add("motion-ready");
 
-    const revealTargets = Array.from(
-      document.querySelectorAll<HTMLElement>(
-        "main section:not(.home-hero) .rounded-2xl, main section:not(.home-hero) .rounded-xl, main section:not(.home-hero) article, main section:not(.home-hero) .group",
-      ),
-    );
-
-    revealTargets.forEach((el, index) => {
-      el.classList.add("reveal-on-scroll");
-      el.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 70}ms`);
-    });
-
-    const reveal = (target: Element) => {
-      target.classList.add("is-visible");
-    };
-
-    let observer: IntersectionObserver | null = null;
-    let revealFallback = 0;
-
-    if (typeof window.IntersectionObserver === "function") {
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              reveal(entry.target);
-              observer?.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.14, rootMargin: "0px 0px -8% 0px" },
-      );
-
-      revealTargets.forEach((el) => observer?.observe(el));
-      revealFallback = window.setTimeout(() => {
-        revealTargets.forEach(reveal);
-        observer?.disconnect();
-      }, 1800);
-    } else {
-      revealTargets.forEach(reveal);
-    }
-
     let frame = 0;
+    const hasAnimationFrame = typeof window.requestAnimationFrame === "function";
+    const hasCancelAnimationFrame = typeof window.cancelAnimationFrame === "function";
+
     const updateHeroScroll = () => {
       frame = 0;
-      const progress = Math.min(window.scrollY / 520, 1);
-      root.style.setProperty("--hero-scroll", progress.toFixed(3));
+      root.style.setProperty("--hero-scroll", getHeroScrollProgress());
     };
+
     const onScroll = () => {
       if (frame) return;
-      if (typeof window.requestAnimationFrame === "function") {
-        frame = window.requestAnimationFrame(updateHeroScroll);
+
+      if (!hasAnimationFrame) {
+        updateHeroScroll();
         return;
       }
-      updateHeroScroll();
+
+      frame = window.requestAnimationFrame(updateHeroScroll);
     };
 
     updateHeroScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      root.classList.remove("motion-ready");
-      if (revealFallback) window.clearTimeout(revealFallback);
-      observer?.disconnect();
       window.removeEventListener("scroll", onScroll);
-      if (frame && typeof window.cancelAnimationFrame === "function") {
+      if (frame && hasCancelAnimationFrame) {
         window.cancelAnimationFrame(frame);
       }
+      root.classList.remove("motion-ready");
       root.style.removeProperty("--hero-scroll");
     };
   }, []);
