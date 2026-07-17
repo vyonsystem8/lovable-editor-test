@@ -316,6 +316,9 @@
   }
 
   .motion-ready .reveal-on-scroll {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
     opacity: 0;
     filter: blur(12px);
     transform: translateY(22px);
