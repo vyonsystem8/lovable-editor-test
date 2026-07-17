@@ -120,7 +120,9 @@ function Hero() {
 function HomeMotion() {
   useEffect(() => {
     const root = document.documentElement;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (reduceMotion) {
       root.style.removeProperty("--hero-scroll");
@@ -144,23 +146,30 @@ function HomeMotion() {
       target.classList.add("is-visible");
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            reveal(entry.target);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.14, rootMargin: "0px 0px -8% 0px" },
-    );
+    let observer: IntersectionObserver | null = null;
+    let revealFallback = 0;
 
-    revealTargets.forEach((el) => observer.observe(el));
-    const revealFallback = window.setTimeout(() => {
+    if (typeof window.IntersectionObserver === "function") {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              reveal(entry.target);
+              observer?.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.14, rootMargin: "0px 0px -8% 0px" },
+      );
+
+      revealTargets.forEach((el) => observer?.observe(el));
+      revealFallback = window.setTimeout(() => {
+        revealTargets.forEach(reveal);
+        observer?.disconnect();
+      }, 1800);
+    } else {
       revealTargets.forEach(reveal);
-      observer.disconnect();
-    }, 1800);
+    }
 
     let frame = 0;
     const updateHeroScroll = () => {
@@ -169,7 +178,12 @@ function HomeMotion() {
       root.style.setProperty("--hero-scroll", progress.toFixed(3));
     };
     const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(updateHeroScroll);
+      if (frame) return;
+      if (typeof window.requestAnimationFrame === "function") {
+        frame = window.requestAnimationFrame(updateHeroScroll);
+        return;
+      }
+      updateHeroScroll();
     };
 
     updateHeroScroll();
@@ -177,10 +191,12 @@ function HomeMotion() {
 
     return () => {
       root.classList.remove("motion-ready");
-      window.clearTimeout(revealFallback);
-      observer.disconnect();
+      if (revealFallback) window.clearTimeout(revealFallback);
+      observer?.disconnect();
       window.removeEventListener("scroll", onScroll);
-      if (frame) cancelAnimationFrame(frame);
+      if (frame && typeof window.cancelAnimationFrame === "function") {
+        window.cancelAnimationFrame(frame);
+      }
       root.style.removeProperty("--hero-scroll");
     };
   }, []);
@@ -207,7 +223,18 @@ function Stat({
   useEffect(() => {
     if (value === undefined) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setDisplay(n);
+      return;
+    }
+
+    if (
+      typeof window.IntersectionObserver !== "function" ||
+      typeof window.requestAnimationFrame !== "function"
+    ) {
       setDisplay(n);
       return;
     }
@@ -221,13 +248,13 @@ function Stat({
       const progress = Math.min((time - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setDisplay(`${prefix}${Math.round(value * eased)}${suffix}`);
-      if (progress < 1) frame = requestAnimationFrame(run);
+      if (progress < 1) frame = window.requestAnimationFrame(run);
     };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-        frame = requestAnimationFrame(run);
+        frame = window.requestAnimationFrame(run);
         observer.disconnect();
       },
       { threshold: 0.5 },
@@ -237,7 +264,9 @@ function Stat({
 
     return () => {
       observer.disconnect();
-      if (frame) cancelAnimationFrame(frame);
+      if (frame && typeof window.cancelAnimationFrame === "function") {
+        window.cancelAnimationFrame(frame);
+      }
     };
   }, [n, prefix, suffix, value]);
 
