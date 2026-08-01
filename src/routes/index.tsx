@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Section } from "@/components/site/Section";
 import { CTA } from "@/components/site/CTA";
 import { FAQ } from "@/components/site/FAQ";
@@ -77,15 +77,21 @@ function Index() {
 function Hero() {
   return (
     <section className="home-hero relative overflow-hidden bg-[#182433] text-white pt-28 md:pt-36 pb-24 md:pb-32 -mt-20">
-      <HeroBg />
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="https://pub-dd3968562f704142a278c10e4cc511b6.r2.dev/Clientes/Consync/Hero_desktop_consync.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#182433]/90 via-[#182433]/70 to-[#182433]/30" />
       <div className="container-x relative">
         <div className="max-w-3xl hero-copy">
-          <div className="cinematic-in eyebrow !text-[#FFA06A]">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#F26B38]" />
-            Contabilidade Consultiva · Brasília/DF
-          </div>
-          <h1 className="cinematic-in mt-5 text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.02] tracking-tight">
-            Contabilidade inteligente para empresas que querem{" "}
+          <h1 className="cinematic-in text-3xl md:text-5xl lg:text-[56px] font-extrabold leading-[1.05] tracking-tight">
+            Contabilidade para empresas que querem{" "}
             <span className="text-[#FFA06A]">crescer com segurança</span>.
           </h1>
           <p className="cinematic-in mt-7 max-w-2xl text-lg md:text-xl text-white/75 leading-relaxed">
@@ -104,11 +110,6 @@ function Hero() {
             >
               Conhecer soluções
             </CTA>
-          </div>
-          <div className="cinematic-in mt-14 grid grid-cols-3 max-w-xl gap-6 text-white/70 text-sm">
-            <Stat n="+10 anos" l="de experiência" value={10} prefix="+" suffix=" anos" />
-            <Stat n="100%" l="digital e consultivo" value={100} suffix="%" />
-            <Stat n="Brasília" l="DF e região" />
           </div>
         </div>
       </div>
@@ -174,80 +175,6 @@ function HomeMotion() {
   }, []);
 
   return null;
-}
-
-function Stat({
-  n,
-  l,
-  value,
-  prefix = "",
-  suffix = "",
-}: {
-  n: string;
-  l: string;
-  value?: number;
-  prefix?: string;
-  suffix?: string;
-}) {
-  const [display, setDisplay] = useState(value === undefined ? n : `${prefix}0${suffix}`);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (value === undefined) return;
-
-    if (
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      setDisplay(n);
-      return;
-    }
-
-    if (
-      typeof window.IntersectionObserver !== "function" ||
-      typeof window.requestAnimationFrame !== "function"
-    ) {
-      setDisplay(n);
-      return;
-    }
-
-    let frame = 0;
-    let start = 0;
-    const duration = 1400;
-
-    const run = (time: number) => {
-      if (!start) start = time;
-      const progress = Math.min((time - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(`${prefix}${Math.round(value * eased)}${suffix}`);
-      if (progress < 1) frame = window.requestAnimationFrame(run);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        frame = window.requestAnimationFrame(run);
-        observer.disconnect();
-      },
-      { threshold: 0.5 },
-    );
-
-    if (ref.current) observer.observe(ref.current);
-
-    return () => {
-      observer.disconnect();
-      if (frame && typeof window.cancelAnimationFrame === "function") {
-        window.cancelAnimationFrame(frame);
-      }
-    };
-  }, [n, prefix, suffix, value]);
-
-  return (
-    <div ref={ref} className="stat-card border-l border-white/15 pl-4">
-      <div className="text-2xl font-extrabold text-white">{display}</div>
-      <div className="text-xs mt-1 uppercase tracking-[0.14em] text-white/55">{l}</div>
-    </div>
-  );
 }
 
 function Sobre() {
