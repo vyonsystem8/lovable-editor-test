@@ -77,15 +77,21 @@ function Index() {
 function Hero() {
   return (
     <section className="home-hero relative overflow-hidden bg-[#182433] text-white pt-28 md:pt-36 pb-24 md:pb-32 -mt-20">
-      <HeroBg />
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="https://pub-dd3968562f704142a278c10e4cc511b6.r2.dev/Clientes/Consync/Hero_desktop_consync.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#182433]/90 via-[#182433]/70 to-[#182433]/30" />
       <div className="container-x relative">
         <div className="max-w-3xl hero-copy">
-          <div className="cinematic-in eyebrow !text-[#FFA06A]">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#F26B38]" />
-            Contabilidade Consultiva · Brasília/DF
-          </div>
-          <h1 className="cinematic-in mt-5 text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.02] tracking-tight">
-            Contabilidade inteligente para empresas que querem{" "}
+          <h1 className="cinematic-in text-3xl md:text-5xl lg:text-[56px] font-extrabold leading-[1.05] tracking-tight">
+            Contabilidade para empresas que querem{" "}
             <span className="text-[#FFA06A]">crescer com segurança</span>.
           </h1>
           <p className="cinematic-in mt-7 max-w-2xl text-lg md:text-xl text-white/75 leading-relaxed">
@@ -104,11 +110,6 @@ function Hero() {
             >
               Conhecer soluções
             </CTA>
-          </div>
-          <div className="cinematic-in mt-14 grid grid-cols-3 max-w-xl gap-6 text-white/70 text-sm">
-            <Stat n="+10 anos" l="de experiência" value={10} prefix="+" suffix=" anos" />
-            <Stat n="100%" l="digital e consultivo" value={100} suffix="%" />
-            <Stat n="Brasília" l="DF e região" />
           </div>
         </div>
       </div>
