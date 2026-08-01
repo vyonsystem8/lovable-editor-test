@@ -33,7 +33,9 @@ export function Header() {
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="flex items-center gap-2 group" aria-label="Consync Contabilidade">
-          <LogoFull className="h-7 w-auto text-[#182433] md:h-8" />
+          <LogoFull
+            className={`h-7 w-auto md:h-8 transition-colors ${scrolled ? "text-[#182433]" : "text-white"}`}
+          />
         </Link>
         <nav className="hidden lg:flex items-center gap-8">
           {NAV.map((item) => (
