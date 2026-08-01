@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { trackEvent } from "@/lib/track";
+import { LogoFull } from "@/components/site/Logo";
 
 const NAV = [
   { to: "/", label: "Início" },
@@ -32,7 +33,7 @@ export function Header() {
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="flex items-center gap-2 group" aria-label="Consync Contabilidade">
-          <Logo />
+          <LogoFull className="h-7 w-auto text-[#182433] md:h-8" />
         </Link>
         <nav className="hidden lg:flex items-center gap-8">
           {NAV.map((item) => (
@@ -102,20 +103,5 @@ export function Header() {
         </div>
       )}
     </header>
-  );
-}
-
-function Logo() {
-  return (
-    <span className="flex items-center gap-2">
-      <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#182433]">
-        <span className="absolute inset-[6px] rounded-sm border border-[#FFA06A]" />
-        <span className="absolute left-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-[#F26B38]" />
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className="text-[15px] font-extrabold tracking-tight text-[#182433]">Consync</span>
-        <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#385577]">Contabilidade</span>
-      </span>
-    </span>
   );
 }
