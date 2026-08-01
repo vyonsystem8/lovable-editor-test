@@ -1,21 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { trackEvent } from "@/lib/track";
+import { LogoFull } from "@/components/site/Logo";
 
 export function Footer() {
   return (
     <footer className="bg-[#182433] text-[#F8F8F5]">
       <div className="container-x py-16 grid gap-12 md:grid-cols-12">
         <div className="md:col-span-4">
-          <div className="flex items-center gap-2">
-            <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/10">
-              <span className="absolute inset-[7px] rounded-sm border border-[#FFA06A]" />
-              <span className="absolute left-2 top-2 h-1.5 w-1.5 rounded-full bg-[#F26B38]" />
-            </span>
-            <div className="leading-none">
-              <div className="text-base font-extrabold tracking-tight">Consync</div>
-              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60">Contabilidade</div>
-            </div>
-          </div>
+          <LogoFull className="h-8 w-auto text-white" />
           <p className="mt-5 max-w-sm text-sm text-white/70">
             Contabilidade consultiva em Brasília. Tecnologia, estratégia e proximidade para empresas que querem crescer com segurança.
           </p>
