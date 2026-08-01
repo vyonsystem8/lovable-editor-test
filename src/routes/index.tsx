@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Section } from "@/components/site/Section";
 import { CTA } from "@/components/site/CTA";
 import { FAQ } from "@/components/site/FAQ";
@@ -175,80 +175,6 @@ function HomeMotion() {
   }, []);
 
   return null;
-}
-
-function Stat({
-  n,
-  l,
-  value,
-  prefix = "",
-  suffix = "",
-}: {
-  n: string;
-  l: string;
-  value?: number;
-  prefix?: string;
-  suffix?: string;
-}) {
-  const [display, setDisplay] = useState(value === undefined ? n : `${prefix}0${suffix}`);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (value === undefined) return;
-
-    if (
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      setDisplay(n);
-      return;
-    }
-
-    if (
-      typeof window.IntersectionObserver !== "function" ||
-      typeof window.requestAnimationFrame !== "function"
-    ) {
-      setDisplay(n);
-      return;
-    }
-
-    let frame = 0;
-    let start = 0;
-    const duration = 1400;
-
-    const run = (time: number) => {
-      if (!start) start = time;
-      const progress = Math.min((time - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(`${prefix}${Math.round(value * eased)}${suffix}`);
-      if (progress < 1) frame = window.requestAnimationFrame(run);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        frame = window.requestAnimationFrame(run);
-        observer.disconnect();
-      },
-      { threshold: 0.5 },
-    );
-
-    if (ref.current) observer.observe(ref.current);
-
-    return () => {
-      observer.disconnect();
-      if (frame && typeof window.cancelAnimationFrame === "function") {
-        window.cancelAnimationFrame(frame);
-      }
-    };
-  }, [n, prefix, suffix, value]);
-
-  return (
-    <div ref={ref} className="stat-card border-l border-white/15 pl-4">
-      <div className="text-2xl font-extrabold text-white">{display}</div>
-      <div className="text-xs mt-1 uppercase tracking-[0.14em] text-white/55">{l}</div>
-    </div>
-  );
 }
 
 function Sobre() {
